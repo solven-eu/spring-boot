@@ -19,18 +19,7 @@
                     "engine": "rules"
                 },
                 {
-                    "engine": "eclipse_formatter",
-                    "parameters": {
-                        "url": "https://raw.githubusercontent.com/spring-io/spring-javaformat/master/.eclipse/eclipse-code-formatter.xml"
-                    }
-                },
-                {
-                    "engine": "revelc_imports",
-                    "parameters": {
-                        "remove_unused": true,
-                        "groups": "java.,javax.,org.,com.",
-                        "static_groups": "java,*"
-                    }
+                    "engine": "spring_formatter"
                 }
             ]
         }
