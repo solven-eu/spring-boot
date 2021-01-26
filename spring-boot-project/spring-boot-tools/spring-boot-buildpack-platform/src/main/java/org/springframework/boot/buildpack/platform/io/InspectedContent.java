@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.boot.buildpack.platform.io;
 
 import java.io.ByteArrayOutputStream;
@@ -23,10 +22,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StreamUtils;
+import java.nio.file.Files;
 
 /**
  * {@link Content} that is reads and inspects a source of data only once but allows it to
@@ -168,7 +167,7 @@ public class InspectedContent implements Content {
 		}
 
 		private void convertToTempFile() throws IOException {
-			this.tempFile = File.createTempFile("buildpack", ".tmp");
+			this.tempFile = Files.createTempFile("buildpack", ".tmp").toFile();
 			byte[] bytes = ((ByteArrayOutputStream) this.delegate).toByteArray();
 			this.delegate = new FileOutputStream(this.tempFile);
 			StreamUtils.copy(bytes, this.delegate);

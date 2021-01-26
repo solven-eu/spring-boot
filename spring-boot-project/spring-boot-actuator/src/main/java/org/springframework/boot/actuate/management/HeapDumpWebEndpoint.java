@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.boot.actuate.management;
 
 import java.io.Closeable;
@@ -32,10 +31,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.web.WebEndpointResponse;
@@ -107,7 +104,7 @@ public class HeapDumpWebEndpoint {
 
 	private File createTempFile(boolean live) throws IOException {
 		String date = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm").format(LocalDateTime.now());
-		File file = File.createTempFile("heapdump" + date + (live ? "-live" : ""), ".hprof");
+		File file = Files.createTempFile("heapdump" + date + (live ? "-live" : ""), ".hprof").toFile();
 		file.delete();
 		return file;
 	}
@@ -209,7 +206,6 @@ public class HeapDumpWebEndpoint {
 				public int read(ByteBuffer dst) throws IOException {
 					return readableChannel.read(dst);
 				}
-
 			};
 		}
 
@@ -221,7 +217,6 @@ public class HeapDumpWebEndpoint {
 				public void close() throws IOException {
 					closeThenDeleteFile(this.in);
 				}
-
 			};
 		}
 
