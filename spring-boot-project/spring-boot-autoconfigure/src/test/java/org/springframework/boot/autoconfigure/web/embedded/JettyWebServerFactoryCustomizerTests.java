@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.boot.autoconfigure.web.embedded;
 
 import java.io.File;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.stream.Collectors;
-
 import org.eclipse.jetty.server.AbstractConnector;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.CustomRequestLog;
@@ -39,7 +37,6 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.util.thread.ThreadPool;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties.ForwardHeadersStrategy;
 import org.springframework.boot.autoconfigure.web.ServerProperties.Jetty;
@@ -52,10 +49,10 @@ import org.springframework.boot.web.embedded.jetty.JettyWebServer;
 import org.springframework.mock.env.MockEnvironment;
 import org.springframework.test.context.support.TestPropertySourceUtils;
 import org.springframework.test.util.ReflectionTestUtils;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import java.nio.file.Files;
 
 /**
  * Tests for {@link JettyWebServerFactoryCustomizer}.
@@ -114,7 +111,7 @@ class JettyWebServerFactoryCustomizerTests {
 
 	@Test
 	void accessLogCanBeCustomized() throws IOException {
-		File logFile = File.createTempFile("jetty_log", ".log");
+		File logFile = Files.createTempFile("jetty_log", ".log").toFile();
 		bind("server.jetty.accesslog.enabled=true", "server.jetty.accesslog.format=extended_ncsa",
 				"server.jetty.accesslog.filename=" + logFile.getAbsolutePath().replace("\\", "\\\\"),
 				"server.jetty.accesslog.file-date-format=yyyy-MM-dd", "server.jetty.accesslog.retention-period=42",

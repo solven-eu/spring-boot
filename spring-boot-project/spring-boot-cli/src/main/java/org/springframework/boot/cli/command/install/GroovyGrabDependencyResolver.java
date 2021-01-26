@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.boot.cli.command.install;
 
 import java.io.File;
@@ -26,11 +25,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.codehaus.groovy.control.CompilationFailedException;
-
 import org.springframework.boot.cli.compiler.GroovyCompiler;
 import org.springframework.boot.cli.compiler.GroovyCompilerConfiguration;
+import java.nio.file.Files;
 
 /**
  * A {@code DependencyResolver} implemented using Groovy's {@code @Grab}.
@@ -67,7 +65,7 @@ class GroovyGrabDependencyResolver implements DependencyResolver {
 	}
 
 	private String createSources(List<String> artifactIdentifiers) throws IOException {
-		File file = File.createTempFile("SpringCLIDependency", ".groovy");
+		File file = Files.createTempFile("SpringCLIDependency", ".groovy").toFile();
 		file.deleteOnExit();
 		try (OutputStreamWriter stream = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8)) {
 			for (String artifactIdentifier : artifactIdentifiers) {

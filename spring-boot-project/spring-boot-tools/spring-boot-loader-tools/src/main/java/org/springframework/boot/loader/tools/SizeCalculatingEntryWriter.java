@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.boot.loader.tools;
 
 import java.io.ByteArrayInputStream;
@@ -25,8 +24,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import org.springframework.util.StreamUtils;
+import java.nio.file.Files;
 
 /**
  * {@link EntryWriter} that always provides size information.
@@ -126,7 +125,7 @@ final class SizeCalculatingEntryWriter implements EntryWriter {
 
 		private void initializeTempFile() throws IOException {
 			if (this.tempFile == null) {
-				this.tempFile = File.createTempFile("springboot-", "-entrycontent");
+				this.tempFile = Files.createTempFile("springboot-", "-entrycontent").toFile();
 				this.tempFile.deleteOnExit();
 			}
 		}

@@ -30,8 +30,7 @@ public class SampleApplication {
 
 	public static void main(String[] args) throws Exception {
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-		ObjectName name = new ObjectName(
-				"org.springframework.boot:type=Admin,name=SpringApplication");
+		ObjectName name = new ObjectName("org.springframework.boot:type=Admin,name=SpringApplication");
 		SpringApplicationAdmin mbean = new SpringApplicationAdmin();
 		mbs.registerMBean(mbean, name);
 
@@ -41,8 +40,7 @@ public class SampleApplication {
 		int waitAttempts = 0;
 		while (!mbean.shutdownInvoked) {
 			if (waitAttempts > 30) {
-				throw new IllegalStateException(
-						"Shutdown should have been invoked by now");
+				throw new IllegalStateException("Shutdown should have been invoked by now");
 			}
 			synchronized (lock) {
 				lock.wait(250);

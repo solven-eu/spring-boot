@@ -30,8 +30,8 @@ public class SampleApplication {
 	private static void assertEnvValue(String envKey, String expectedValue) {
 		String actual = System.getenv(envKey);
 		if (!expectedValue.equals(actual)) {
-			throw new IllegalStateException("env property [" + envKey + "] mismatch "
-					+ "(got [" + actual + "], expected [" + expectedValue + "]");
+			throw new IllegalStateException("env property [" + envKey + "] mismatch " + "(got [" + actual
+					+ "], expected [" + expectedValue + "]");
 		}
 	}
 
